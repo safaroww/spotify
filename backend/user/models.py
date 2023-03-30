@@ -6,7 +6,7 @@ from colorfield.fields import ColorField
 
 class Customer(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='customer/images/')
+    image = models.ImageField(upload_to='customer/images/', null=True, blank=True)
     liked_songs = models.ManyToManyField('song.Song', related_name='liked_customers') 
     liked_playlists = models.ManyToManyField('song.Playlist', related_name='liked_customers')
     followed_artists = models.ManyToManyField('Artist', related_name='followers')
@@ -16,8 +16,8 @@ class Customer(models.Model):
 
 class Artist(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='artist/images/')
-    cover = models.ImageField(upload_to='artist/covers/')
+    image = models.ImageField(upload_to='artist/images/', null=True, blank=True)
+    cover = models.ImageField(upload_to='artist/covers/') 
     color = ColorField(null=True, blank=True)
     updated = models.DateField(auto_now=True)
     created = models.DateField(auto_now_add=True)
